@@ -3,8 +3,14 @@ import 'package:todo_list_app/constants/colors.dart';
 import 'package:todo_list_app/model/todo.dart';
 
 class TodoItem extends StatelessWidget {
-  const TodoItem({super.key, required this.todo});
+  const TodoItem(
+      {super.key,
+      required this.todo,
+      required this.onToDoChanged,
+      required this.onDeleteItem});
   final ToDo todo;
+  final onToDoChanged;
+  final onDeleteItem;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -15,7 +21,8 @@ class TodoItem extends StatelessWidget {
         ),
         child: ListTile(
           onTap: () {
-            print("Check maile tıklandı");
+            // print("Check maile tıklandı");
+            onToDoChanged(todo);
           },
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
@@ -49,7 +56,8 @@ class TodoItem extends StatelessWidget {
               iconSize: 18,
               icon: const Icon(Icons.delete),
               onPressed: () {
-                print("Çöp kutusuna tıklandı");
+                // print("Çöp kutusuna tıklandı");
+                onDeleteItem(todo.id);
               },
             ),
           ),
